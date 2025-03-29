@@ -300,9 +300,40 @@ return [
 
     'menu' => [
         [
-            'text' => 'Dashboard',
-            'url'  => 'admin',
+            'text' => 'Inicio',
+            'url'  => 'home',
             'icon' => 'fas fa-fw fa-tachometer-alt',
+        ],
+        [
+            'text' => 'Productos',
+            'url'  => 'productos',
+            'icon' => 'fas fa-fw fa-box',
+        ],
+        [
+            'text' => 'Configuraciones',
+            'icon' => 'fas fa-fw fa-cogs',
+            'submenu' => [
+                [
+                    'text' => 'Administradores',
+                    'url'  => 'admin',
+                    'icon' => 'fas fa-fw fa-user-shield',
+                ],
+                [
+                    'text' => 'Gestion de Clientes',
+                    'url'  => 'admin/clientes',
+                    'icon' => 'fas fa-fw fa-users',
+                ],
+                [
+                    'text' => 'Gestión de Productos',
+                    'url'  => 'admin/productos',
+                    'icon' => 'fas fa-fw fa-box-open',
+                ],
+                [
+                    'text' => 'Gestión de Inventario',
+                    'url'  => 'admin/inventario',
+                    'icon' => 'fas fa-fw fa-warehouse',
+                ],
+            ],
         ],
     ],
 
