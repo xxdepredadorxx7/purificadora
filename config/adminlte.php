@@ -299,8 +299,11 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
-
+        [
+            'text' => 'Dashboard',
+            'url'  => 'admin',
+            'icon' => 'fas fa-fw fa-tachometer-alt',
+        ],
     ],
 
     /*
