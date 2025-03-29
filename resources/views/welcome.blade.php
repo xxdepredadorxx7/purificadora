@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <p>Bienvenido a la vista Bienvenida</p>
+    <p>Bienvenido a la vista publica</p>
 @stop
 
 @section('css')
