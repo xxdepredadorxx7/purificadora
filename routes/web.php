@@ -25,9 +25,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/productos', [ProductosClientesController::class, 'index'])->name('productos.index');
     Route::get('/pedidos', [PedidosClientesController::class, 'index'])->name('pedidos.index');
-    Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil.index');
-    Route::get('/perfil/editar', [PerfilController::class, 'edit'])->name('perfil.edit');
-    Route::put('/perfil', [PerfilController::class, 'update'])->name('perfil.update');
+    Route::prefix('perfil')->name('perfil.')->group(function () {
+        Route::get('/', [PerfilController::class, 'index'])->name('index');
+        Route::get('/editar', [PerfilController::class, 'edit'])->name('edit');
+        Route::put('/', [PerfilController::class, 'update'])->name('update');
+    });
 });
 
 // Rutas de administración
