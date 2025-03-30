@@ -44,7 +44,7 @@
                 <div class="icon">
                     <i class="fas fa-user"></i>
                 </div>
-                <a href="{{-- {{ route('user.perfil.index') }} --}}" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('perfil.index') }}" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
 

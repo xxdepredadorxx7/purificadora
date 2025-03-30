@@ -1,75 +1,87 @@
 @extends('adminlte::page')
 
-{{-- Extend and customize the browser title --}}
-
+{{-- Título del navegador --}}
 @section('title')
-    {{ config('adminlte.title') }}
+    {{ config('adminlte.title', 'Dashboard') }}
     @hasSection('subtitle') | @yield('subtitle') @endif
 @stop
 
-{{-- Extend and customize the page content header --}}
-
+{{-- Encabezado del contenido --}}
 @section('content_header')
     @hasSection('content_header_title')
-        <h1 class="text-muted">
-            @yield('content_header_title')
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="text-muted">
+                @yield('content_header_title')
 
-            @hasSection('content_header_subtitle')
-                <small class="text-dark">
-                    <i class="fas fa-xs fa-angle-right text-muted"></i>
-                    @yield('content_header_subtitle')
-                </small>
+                @hasSection('content_header_subtitle')
+                    <small class="text-dark">
+                        <i class="fas fa-xs fa-angle-right text-muted"></i>
+                        @yield('content_header_subtitle')
+                    </small>
+                @endif
+            </h1>
+
+            {{-- Botón de acción opcional --}}
+            @hasSection('action_button')
+                <div>
+                    @yield('action_button')
+                </div>
             @endif
-        </h1>
+        </div>
     @endif
 @stop
 
-{{-- Rename section content to content_body --}}
-
+{{-- Contenido principal --}}
 @section('content')
-    @yield('content_body')
-@stop
-
-{{-- Create a common footer --}}
-
-@section('footer')
-    <div class="float-right">
-        Version: {{ config('app.version', '1.0.0') }}
+    <div class="container-fluid">
+        @yield('content_body')
     </div>
-
-    <strong>
-        <a href="{{ config('app.company_url', '#') }}">
-            {{ config('app.company_name', 'My company') }}
-        </a>
-    </strong>
 @stop
 
-{{-- Add common Javascript/Jquery code --}}
+{{-- Pie de página común --}}
+@section('footer')
+    <footer class="text-center py-3">
+        <div>
+            <strong>
+                <a href="{{ config('app.company_url', '#') }}">
+                    {{ config('app.company_name', 'Mi Empresa') }}
+                </a>
+            </strong>
+            &copy; {{ date('Y') }}. Todos los derechos reservados.
+        </div>
+        <div class="text-muted">
+            Versión: {{ config('app.version', '1.0.0') }}
+        </div>
+    </footer>
+@stop
 
+{{-- Scripts comunes --}}
 @push('js')
 <script>
-
     $(document).ready(function() {
-        // Add your common script logic here...
+        console.log("Plantilla cargada correctamente.");
     });
-
 </script>
 @endpush
 
-{{-- Add common CSS customizations --}}
-
+{{-- Estilos personalizados --}}
 @push('css')
-<style type="text/css">
-
-    {{-- You can add AdminLTE customizations here --}}
-    /*
-    .card-header {
-        border-bottom: none;
-    }
-    .card-title {
+<style>
+    /* Personalización del encabezado */
+    .content-header h1 {
+        font-size: 1.8rem;
         font-weight: 600;
     }
-    */
 
+    /* Personalización del pie de página */
+    footer {
+        background-color: #f8f9fa;
+        border-top: 1px solid #dee2e6;
+    }
+
+    /* Ajustes generales */
+    .container-fluid {
+        padding: 20px;
+    }
 </style>
 @endpush
