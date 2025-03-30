@@ -311,6 +311,7 @@ return [
         ],
         [
             'text' => 'Configuraciones',
+            'can' => 'admin.access',
             'icon' => 'fas fa-fw fa-cogs',
             'submenu' => [
                 [
