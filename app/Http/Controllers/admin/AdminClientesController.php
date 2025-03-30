@@ -43,6 +43,8 @@ class AdminClientesController extends Controller
             $cliente = $this->validarCliente($id);
             $cliente->delete();
             return redirect()->route('admin.clientes.index')->with('success', 'Cliente eliminado con éxito.');
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return redirect()->route('admin.clientes.index')->with('error', 'El cliente no existe.');
         } catch (\Exception $e) {
             return redirect()->route('admin.clientes.index')->with('error', 'No se pudo eliminar el cliente.');
         }
