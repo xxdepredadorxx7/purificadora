@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class ClientesController extends Controller
+class AdminClientesController extends Controller
 {
     public function index(){
         $clientes = User::where('role', 'cliente')->get();
