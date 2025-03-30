@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminClientesController;
 use App\Http\Controllers\Admin\AdminProductosController;
 use App\Http\Controllers\Admin\AdminInventarioController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\PerfilController;
 
 // Rutas de autenticación
 Auth::routes();
@@ -24,6 +25,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/productos', [ProductosClientesController::class, 'index'])->name('productos.index');
     Route::get('/pedidos', [PedidosClientesController::class, 'index'])->name('pedidos.index');
+    Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil.index');
+    Route::get('/perfil/editar', [PerfilController::class, 'edit'])->name('perfil.edit');
+    Route::put('/perfil', [PerfilController::class, 'update'])->name('perfil.update');
 });
 
 // Rutas de administración
