@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Administrador')
+@section('title', 'Pedidos')
 
 @section('content_header')
     <h1>Bienvenido</h1>
 @stop
 
 @section('content')
-    <p>Bienvenido a la vista Panel del Administrador</p>
+    <p>Bienvenido a la vista Pedidos del Cliente</p>
 @stop
 
 @section('css')
