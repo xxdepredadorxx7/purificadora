@@ -57,7 +57,7 @@
                 <div class="icon">
                     <i class="fas fa-headset"></i>
                 </div>
-                <a href="{{-- {{ route('user.soporte.index') }} --}}" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('soporte.index') }}" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
     </div>

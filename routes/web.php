@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\AdminProductosController;
 use App\Http\Controllers\Admin\AdminInventarioController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\SoporteController;
 
 // Rutas de autenticación
 Auth::routes();
@@ -30,6 +31,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/editar', [PerfilController::class, 'edit'])->name('edit');
         Route::put('/', [PerfilController::class, 'update'])->name('update');
     });
+    Route::get('/soporte', [SoporteController::class, 'index'])->name('soporte.index');
 });
 
 // Rutas de administración
