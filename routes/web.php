@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
 // Rutas de administración
 Route::middleware([AdminMiddleware::class])->prefix('admin')->as('admin.')->group(function () {
     Route::get('/', [HomeAdminController::class, 'index'])->name('index');
-    Route::resource('clientes', AdminClientesController::class)->only(['index']);
+    Route::resource('clientes', AdminClientesController::class)->except(['create', 'store', 'show']);
     Route::resource('productos', AdminProductosController::class)->only(['index']);
     Route::get('/pedidos', [AdminProductosController::class, 'index'])->name('pedidos.index');
     Route::get('/inventario', [AdminInventarioController::class, 'index'])->name('inventario.index');
