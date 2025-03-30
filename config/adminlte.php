@@ -14,8 +14,8 @@ return [
     |
     */
 
-    'title' => 'Inicio de Sesion',
-    'title_prefix' => '',
+    'title' => '',
+    'title_prefix' => 'Purificadora | ',
     'title_postfix' => '',
 
     /*
@@ -134,11 +134,11 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -152,10 +152,10 @@ return [
     |
     */
 
-    'layout_topnav' => null,
+    'layout_topnav' => true,
     'layout_boxed' => null,
     'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
 
@@ -305,9 +305,14 @@ return [
             'icon' => 'fas fa-fw fa-tachometer-alt',
         ],
         [
-            'text' => 'Productos',
+            'text' => 'Catalogo',
             'url'  => 'productos',
             'icon' => 'fas fa-fw fa-box',
+        ],
+        [
+            'text' => 'Mis Pedidos',
+            'url'  => 'pedidos',
+            'icon' => 'fas fa-fw fa-history',
         ],
         [
             'text' => 'Configuraciones',
@@ -328,6 +333,11 @@ return [
                     'text' => 'Gestión de Productos',
                     'url'  => 'admin/productos',
                     'icon' => 'fas fa-fw fa-box-open',
+                ],
+                [
+                    'text' => 'Gestión de Pedidos',
+                    'url'  => 'admin/pedidos',
+                    'icon' => 'fas fa-fw fa-clipboard-check',
                 ],
                 [
                     'text' => 'Gestión de Inventario',
