@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -17,36 +16,21 @@ Auth::routes();
 
 // Ruta de inicio público
 Route::get('/', function () {
-    return view('welcome');
+    return Auth::check() ? redirect('/home') : view('welcome');
 });
 
-// Ruta de inicio para usuarios autenticados
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Rutas para usuarios autenticados
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/productos', [ProductosClientesController::class, 'index'])->name('productos.index');
+    Route::get('/pedidos', [PedidosClientesController::class, 'index'])->name('pedidos.index');
+});
 
-// Ruta de productos para clientes autenticados
-Route::get('/productos', [ProductosClientesController::class, 'index'])
-    ->middleware('auth')
-    ->name('productos.index');
-
-//Ruta de pedidos para clientes autenticados
-Route::get('/pedidos', [PedidosClientesController::class, 'index'])
-    ->middleware('auth')
-    ->name('pedidos.index');
-
-// Grupo de rutas para administración (todas requieren autenticación)
-Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () {
-    // Inicio del panel de administración
-    Route::get('/', [HomeAdminController::class, 'index'])->name('admin.index');
-
-    // Gestión de clientes
-    Route::get('/clientes', [AdminClientesController::class, 'index'])->name('admin.clientes.index');
-
-    // Gestión de productos
-    Route::get('/productos', [AdminProductosController::class, 'index'])->name('admin.productos.index');
-
-    // Gestión de pedidos
-    Route::get('/pedidos', [AdminProductosController::class, 'index'])->name('admin.pedidos.index');
-
-    // Gestión de inventario
-    Route::get('/inventario', [AdminInventarioController::class, 'index'])->name('admin.inventario.index');
+// Rutas de administración
+Route::middleware([AdminMiddleware::class])->prefix('admin')->as('admin.')->group(function () {
+    Route::get('/', [HomeAdminController::class, 'index'])->name('index');
+    Route::resource('clientes', AdminClientesController::class)->only(['index']);
+    Route::resource('productos', AdminProductosController::class)->only(['index']);
+    Route::get('/pedidos', [AdminProductosController::class, 'index'])->name('pedidos.index');
+    Route::get('/inventario', [AdminInventarioController::class, 'index'])->name('inventario.index');
 });
