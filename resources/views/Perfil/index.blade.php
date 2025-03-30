@@ -3,7 +3,7 @@
 @section('title', 'Perfil')
 
 @section('content_header')
-    <h1>{{ Auth::user()->name }}</h1>
+    <h1>Hola, {{ Auth::user()->name }}</h1>
 @stop
 
 @section('content')
@@ -14,11 +14,23 @@
                 <div class="card-header">Perfil de Usuario</div>
 
                 <div class="card-body">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     <div class="mb-3">
                         <strong>Nombre:</strong> {{ $user->name }}
                     </div>
                     <div class="mb-3">
                         <strong>Email:</strong> {{ $user->email }}
+                    </div>
+                    <div class="mb-3">
+                        <strong>Dirección:</strong> {{ $user->direccion ?? 'No especificada' }}
+                    </div>
+                    <div class="mb-3">
+                        <strong>Teléfono:</strong> {{ $user->telefono ?? 'No especificado' }}
                     </div>
                     <div class="mb-3">
                         <strong>Fecha de Registro:</strong> {{ $user->created_at->format('d/m/Y') }}

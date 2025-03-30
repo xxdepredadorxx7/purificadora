@@ -3,7 +3,7 @@
 @section('title', 'Editar')
 
 @section('content_header')
-    <h1>{{ Auth::user()->name }}</h1>
+    <h1>Editar</h1>
 @stop
 
 @section('content')
@@ -36,6 +36,16 @@
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $user->email) }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="direccion" class="form-label">Dirección</label>
+                            <input type="text" name="direccion" id="direccion" class="form-control" value="{{ old('direccion', $user->direccion) }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label">Teléfono</label>
+                            <input type="text" name="telefono" id="telefono" class="form-control" value="{{ old('telefono', $user->telefono) }}">
                         </div>
 
                         <div class="mb-3">

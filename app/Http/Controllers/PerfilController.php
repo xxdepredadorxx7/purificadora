@@ -38,12 +38,16 @@ class PerfilController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'direccion' => 'nullable|string|max:255',
+            'telefono' => 'nullable|string|max:15',
             'password' => 'nullable|min:8|confirmed',
         ]);
 
         // Actualizar los datos del usuario
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->direccion = $request->direccion;
+        $user->telefono = $request->telefono;
 
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
