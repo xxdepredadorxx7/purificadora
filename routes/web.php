@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\InventarioController;
 use App\Http\Controllers\admin\ProductosController;
 use App\Http\Controllers\admin\UsuariosController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductosClientesController;
 use App\Http\Middleware\AdminMiddleware;
 
 // Rutas de autenticación
@@ -22,7 +23,7 @@ Route::get('/', function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Ruta de productos para clientes autenticados
-Route::get('/productos', [ProductosController::class, 'index'])
+Route::get('/productos', [ProductosClientesController::class, 'index'])
     ->middleware('auth')
     ->name('productos.index');
 
