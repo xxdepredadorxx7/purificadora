@@ -40,7 +40,7 @@ class AdminClientesController extends Controller
     public function destroy($id)
     {
         try {
-            $cliente = $this->validarCliente($id);
+            $cliente = User::findOrFail($id);
             $cliente->delete();
             return redirect()->route('admin.clientes.index')->with('success', 'Cliente eliminado con éxito.');
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
