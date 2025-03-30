@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Administrador')
+@section('title', 'Productos')
 
 @section('content_header')
     <h1>Bienvenido</h1>
 @stop
 
 @section('content')
-    <p>Bienvenido a la vista Productos para usuarios</p>
+    <p>Bienvenido a la vista Productos para Clientes</p>
 @stop
 
 @section('css')

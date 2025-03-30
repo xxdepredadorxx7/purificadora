@@ -1,17 +1,12 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
-@section('title', 'Purificadora de Agua | Inicio')
+@section('title', 'Inicio')
 
 @section('content_header')
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark">Bienvenido a {{ config('app.name') }}</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active">Inicio</li>
-                </ol>
             </div>
         </div>
     </div>
@@ -39,7 +34,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>53<sup style="font-size: 20px">%</sup></h3>
+                        <h3>70<sup style="font-size: 20px">%</sup></h3>
                         <p>Pureza Garantizada</p>
                     </div>
                     <div class="icon">

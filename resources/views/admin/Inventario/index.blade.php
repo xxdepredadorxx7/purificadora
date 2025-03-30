@@ -1,6 +1,6 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
-@section('title', 'Administrador')
+@section('title', 'Inventarios')
 
 @section('content_header')
     <h1>Bienvenido</h1>

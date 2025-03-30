@@ -1,13 +1,13 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
-@section('title', 'Administrador')
+@section('title', 'Productos')
 
 @section('content_header')
     <h1>Bienvenido</h1>
 @stop
 
 @section('content')
-    <p>Bienvenido a la vista Productos</p>
+    <p>Bienvenido a la vista para la gestion de Productos</p>
 @stop
 
 @section('css')
