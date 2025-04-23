@@ -11,7 +11,7 @@ class AdminProductosController extends Controller
 {
     public function index()
     {
-        $productos = Producto::all();
+        $productos = Producto::with('inventario')->get(); // Cargar la relación 'inventario'
         return view('admin.productos.index', compact('productos'));
     }
 
@@ -21,18 +21,28 @@ class AdminProductosController extends Controller
         return view('admin.productos.create', compact('inventarios'));
     }
 
-    public function store(Request $request)
+        public function store(Request $request)
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric|min:0',
-            'inventario_id' => 'nullable|exists:inventarios,id',
+            'cantidad' => 'nullable|integer|min:0', // Cantidad para el inventario
         ]);
 
-        Producto::create($request->all());
+        // Crear el producto
+        $producto = Producto::create($request->only('nombre', 'descripcion', 'precio'));
 
-        return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
+        // Crear el inventario si se proporciona una cantidad
+        if ($request->has('cantidad') && $request->cantidad > 0) {
+            Inventario::create([
+                'producto' => $producto->nombre,
+                'cantidad' => $request->cantidad,
+                'producto_id' => $producto->id, // Relacionar con el producto
+            ]);
+        }
+
+        return redirect()->route('admin.productos.index')->with('success', 'Producto creado exitosamente.');
     }
 
     public function edit(Producto $producto)

@@ -24,12 +24,11 @@ class AdminInventarioController extends Controller
         $request->validate([
             'producto' => 'required|string|max:255',
             'cantidad' => 'required|integer|min:0',
-            'precio' => 'required|numeric|min:0',
         ]);
 
-        Inventario::create($request->all());
+        Inventario::create($request->only('producto', 'cantidad'));
 
-        return redirect()->route('admin.inventario.index')->with('success', 'Producto agregado al inventario.');
+        return redirect()->route('admin.inventario.index')->with('success', 'Inventario creado exitosamente.');
     }
 
     public function edit(Inventario $inventario)

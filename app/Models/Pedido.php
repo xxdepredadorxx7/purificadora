@@ -5,18 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Inventario extends Model
+class Pedido extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'producto',
-        'cantidad',
+        'user_id',
         'producto_id',
+        'cantidad',
+        'total',
+        'estado',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function producto()
     {
-        return $this->belongsTo(Producto::class, 'producto_id');
+        return $this->belongsTo(Producto::class);
     }
 }

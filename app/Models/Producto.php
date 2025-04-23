@@ -15,8 +15,8 @@ class Producto extends Model
         'precio',
     ];
 
-        public function inventario()
+    public function inventario()
     {
-        return $this->belongsTo(Inventario::class);
+        return $this->hasOne(Inventario::class, 'producto_id');
     }
 }

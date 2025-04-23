@@ -1,4 +1,3 @@
-<!-- filepath: c:\laragon\www\purificadora\resources\views\admin\inventario\index.blade.php -->
 @extends('layouts.app')
 
 @section('title', 'Inventario')

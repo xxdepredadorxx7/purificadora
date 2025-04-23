@@ -1,4 +1,3 @@
-<!-- filepath: c:\laragon\www\purificadora\resources\views\admin\Inventario\edit.blade.php -->
 @extends('layouts.app')
 
 @section('title', 'Editar Producto del Inventario')
