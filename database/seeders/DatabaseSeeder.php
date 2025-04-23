@@ -24,6 +24,9 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
+        // Llamar al seeder del inventario
+        $this->call(InventarioSeeder::class);
+
         User::factory()->create([
             'name' => 'User Prueba',
             'email' => 'prueba@test.com',

@@ -40,5 +40,13 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->as('admin.')->grou
     Route::resource('clientes', AdminClientesController::class)->except(['create', 'store', 'show']);
     Route::resource('productos', AdminProductosController::class)->only(['index']);
     Route::get('/pedidos', [AdminProductosController::class, 'index'])->name('pedidos.index');
-    Route::get('/inventario', [AdminInventarioController::class, 'index'])->name('inventario.index');
+    Route::resource('/inventario', AdminInventarioController::class)->names([
+        'index' => 'inventario.index',
+        'create' => 'inventario.create',
+        'store' => 'inventario.store',
+        'show' => 'inventario.show',
+        'edit' => 'inventario.edit',
+        'update' => 'inventario.update',
+        'destroy' => 'inventario.destroy',
+    ]);
 });
