@@ -50,20 +50,6 @@
                 <a href="{{ route('admin.productos.index') }}" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-
-        {{-- Inventario Total --}}
-        <div class="col-lg-3 col-6">
-            <div class="small-box bg-danger">
-                <div class="inner">
-                    <h3>{{ $inventarioCount }}</h3>
-                    <p>Inventario Total</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-warehouse"></i>
-                </div>
-                <a href="{{ route('admin.inventario.index') }}" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
     </div>
 
     {{-- Últimos Clientes Registrados --}}

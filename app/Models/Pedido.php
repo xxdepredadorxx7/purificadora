@@ -21,15 +21,15 @@ class Pedido extends Model
     {
         parent::boot();
 
-        // Reducir inventario al crear un pedido
+        // Reducir la cantidad del producto al crear un pedido
         static::creating(function ($pedido) {
             $producto = Producto::find($pedido->producto_id);
-            if ($producto && $producto->inventario) {
-                if ($producto->inventario->cantidad >= $pedido->cantidad) {
-                    $producto->inventario->cantidad -= $pedido->cantidad;
-                    $producto->inventario->save();
+            if ($producto) {
+                if ($producto->cantidad >= $pedido->cantidad) {
+                    $producto->cantidad -= $pedido->cantidad;
+                    $producto->save();
                 } else {
-                    throw new \Exception('No hay suficiente inventario para este pedido.');
+                    throw new \Exception('No hay suficiente cantidad para este pedido.');
                 }
             }
         });
@@ -39,20 +39,20 @@ class Pedido extends Model
             $originalEstado = $pedido->getOriginal('estado');
             $producto = Producto::find($pedido->producto_id);
 
-            if ($producto && $producto->inventario) {
-                // Si el pedido se cancela, devolver la cantidad al inventario
+            if ($producto) {
+                // Si el pedido se cancela, devolver la cantidad al producto
                 if ($originalEstado !== 'cancelado' && $pedido->estado === 'cancelado') {
-                    $producto->inventario->cantidad += $pedido->cantidad;
-                    $producto->inventario->save();
+                    $producto->cantidad += $pedido->cantidad;
+                    $producto->save();
                 }
 
-                // Si el pedido se reactiva desde "cancelado", reducir el inventario nuevamente
+                // Si el pedido se reactiva desde "cancelado", reducir la cantidad nuevamente
                 if ($originalEstado === 'cancelado' && $pedido->estado !== 'cancelado') {
-                    if ($producto->inventario->cantidad >= $pedido->cantidad) {
-                        $producto->inventario->cantidad -= $pedido->cantidad;
-                        $producto->inventario->save();
+                    if ($producto->cantidad >= $pedido->cantidad) {
+                        $producto->cantidad -= $pedido->cantidad;
+                        $producto->save();
                     } else {
-                        throw new \Exception('No hay suficiente inventario para reactivar este pedido.');
+                        throw new \Exception('No hay suficiente cantidad para reactivar este pedido.');
                     }
                 }
             }

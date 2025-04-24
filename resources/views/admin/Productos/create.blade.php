@@ -25,7 +25,7 @@
             <input type="number" step="0.01" name="precio" id="precio" class="form-control" required>
         </div>
         <div class="form-group">
-            <label for="cantidad">Cantidad en inventario</label>
+            <label for="cantidad">Cantidad de productos</label>
             <input type="number" name="cantidad" id="cantidad" class="form-control" min="0">
         </div>
         <button type="submit" class="btn btn-success">Guardar</button>

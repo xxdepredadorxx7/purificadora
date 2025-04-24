@@ -4,21 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Producto;
-use App\Models\Inventario;
 use Illuminate\Http\Request;
 
 class AdminProductosController extends Controller
 {
     public function index()
     {
-        $productos = Producto::with('inventario')->get(); // Cargar la relación 'inventario'
+        $productos = Producto::all();
         return view('admin.productos.index', compact('productos'));
     }
 
     public function create()
     {
-        $inventarios = Inventario::all();
-        return view('admin.productos.create', compact('inventarios'));
+        return view('admin.productos.create');
     }
 
         public function store(Request $request)
@@ -27,28 +25,18 @@ class AdminProductosController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric|min:0',
-            'cantidad' => 'nullable|integer|min:0', // Cantidad para el inventario
+            'cantidad' => 'nullable|integer|min:0',
         ]);
 
         // Crear el producto
-        $producto = Producto::create($request->only('nombre', 'descripcion', 'precio'));
-
-        // Crear el inventario si se proporciona una cantidad
-        if ($request->has('cantidad') && $request->cantidad > 0) {
-            Inventario::create([
-                'producto' => $producto->nombre,
-                'cantidad' => $request->cantidad,
-                'producto_id' => $producto->id, // Relacionar con el producto
-            ]);
-        }
+        $producto = Producto::create($request->only('nombre', 'descripcion', 'precio', 'cantidad'));
 
         return redirect()->route('admin.productos.index')->with('success', 'Producto creado exitosamente.');
     }
 
     public function edit(Producto $producto)
     {
-        $inventarios = Inventario::all();
-        return view('admin.productos.edit', compact('producto', 'inventarios'));
+        return view('admin.productos.edit', compact('producto'));
     }
 
     public function update(Request $request, Producto $producto)
@@ -57,6 +45,7 @@ class AdminProductosController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric|min:0',
+            'cantidad' => 'nullable|integer|min:0',
         ]);
 
         $producto->update($request->all());

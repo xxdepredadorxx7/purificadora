@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\ProductoSeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,8 +25,8 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
-        // Llamar al seeder del inventario
-        $this->call(InventarioSeeder::class);
+        // Llamar al seeder del Producto
+        $this->call(ProductoSeeder::class);
 
         User::factory()->create([
             'name' => 'User Prueba',

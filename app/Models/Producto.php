@@ -13,10 +13,7 @@ class Producto extends Model
         'nombre',
         'descripcion',
         'precio',
+        'cantidad',
     ];
 
-    public function inventario()
-    {
-        return $this->hasOne(Inventario::class, 'producto_id');
-    }
 }

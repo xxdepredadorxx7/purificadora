@@ -8,7 +8,6 @@ use App\Http\Controllers\PedidosClientesController;
 use App\Http\Controllers\Admin\HomeAdminController;
 use App\Http\Controllers\Admin\AdminClientesController;
 use App\Http\Controllers\Admin\AdminProductosController;
-use App\Http\Controllers\Admin\AdminInventarioController;
 use App\Http\Controllers\Admin\AdminPedidosController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\PerfilController;
@@ -41,6 +40,5 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->as('admin.')->grou
     Route::resource('clientes', AdminClientesController::class)->except(['create', 'store', 'show']);
     Route::resource('productos', AdminProductosController::class)->names('productos');
     Route::resource('pedidos', AdminPedidosController::class)->names('pedidos');
-    Route::resource('inventario', AdminInventarioController::class)->names('inventario');
 
 });

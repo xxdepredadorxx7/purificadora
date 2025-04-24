@@ -339,11 +339,6 @@ return [
                     'url'  => 'admin/pedidos',
                     'icon' => 'fas fa-fw fa-clipboard-check',
                 ],
-                [
-                    'text' => 'Gestión de Inventario',
-                    'url'  => 'admin/inventario',
-                    'icon' => 'fas fa-fw fa-warehouse',
-                ],
             ],
         ],
     ],

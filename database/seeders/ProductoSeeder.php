@@ -3,10 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Inventario;
 use App\Models\Producto;
 
-class InventarioSeeder extends Seeder
+class productoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,13 +17,7 @@ class InventarioSeeder extends Seeder
             'nombre' => 'Garrafón 20L',
             'descripcion' => 'Garrafón de agua de 20 litros',
             'precio' => 50.00,
-        ]);
-
-        // Crear un inventario relacionado con el producto
-        Inventario::create([
-            'producto' => $producto->nombre,
-            'cantidad' => 50,
-            'producto_id' => $producto->id, // Relacionar con el producto
+            'cantidad' => 100,
         ]);
     }
 }

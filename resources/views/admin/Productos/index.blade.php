@@ -18,7 +18,7 @@
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Precio</th>
-                <th>Inventario</th>
+                <th>Cantidad</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -29,13 +29,7 @@
                     <td>{{ $producto->nombre }}</td>
                     <td>{{ $producto->descripcion }}</td>
                     <td>${{ $producto->precio }}</td>
-                    <td>
-                        @if ($producto->inventario)
-                            {{ $producto->inventario->producto }} (Cantidad: {{ $producto->inventario->cantidad }})
-                        @else
-                            Sin inventario
-                        @endif
-                    </td>
+                    <td>{{ $producto->cantidad }}</td>
                     <td>
                         <a href="{{ route('admin.productos.edit', $producto) }}" class="btn btn-warning btn-sm">Editar</a>
                         <form action="{{ route('admin.productos.destroy', $producto) }}" method="POST" style="display:inline;">

@@ -26,15 +26,8 @@
             <input type="number" step="0.01" name="precio" id="precio" class="form-control" value="{{ $producto->precio }}" required>
         </div>
         <div class="form-group">
-            <label for="inventario_id">Inventario</label>
-            <select name="inventario_id" id="inventario_id" class="form-control">
-                <option value="">Sin inventario</option>
-                @foreach ($inventarios as $inventario)
-                    <option value="{{ $inventario->id }}" {{ $producto->inventario_id == $inventario->id ? 'selected' : '' }}>
-                        {{ $inventario->producto }} (Cantidad: {{ $inventario->cantidad }})
-                    </option>
-                @endforeach
-            </select>
+            <label for="cantidad">Cantidad</label>
+            <input type="number" name="cantidad" id="cantidad" class="form-control" value="{{ $producto->cantidad }}" required>
         </div>
         <button type="submit" class="btn btn-primary">Actualizar</button>
         <a href="{{ route('admin.productos.index') }}" class="btn btn-secondary">Cancelar</a>
