@@ -25,13 +25,8 @@
             <input type="number" step="0.01" name="precio" id="precio" class="form-control" required>
         </div>
         <div class="form-group">
-            <label for="inventario_id">Inventario</label>
-            <select name="inventario_id" id="inventario_id" class="form-control">
-                <option value="">Sin inventario</option>
-                @foreach ($inventarios as $inventario)
-                    <option value="{{ $inventario->id }}">{{ $inventario->producto }} (Cantidad: {{ $inventario->cantidad }})</option>
-                @endforeach
-            </select>
+            <label for="cantidad">Cantidad en inventario</label>
+            <input type="number" name="cantidad" id="cantidad" class="form-control" min="0">
         </div>
         <button type="submit" class="btn btn-success">Guardar</button>
         <a href="{{ route('admin.productos.index') }}" class="btn btn-secondary">Cancelar</a>

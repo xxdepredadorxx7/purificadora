@@ -57,7 +57,6 @@ class AdminProductosController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric|min:0',
-            'inventario_id' => 'nullable|exists:inventarios,id',
         ]);
 
         $producto->update($request->all());
