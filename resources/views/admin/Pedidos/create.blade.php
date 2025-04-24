@@ -3,6 +3,15 @@
 @section('title', 'Agregar Pedido')
 
 @section('content')
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="container">
     <h1>Agregar Pedido</h1>
     <form action="{{ route('admin.pedidos.store') }}" method="POST">
