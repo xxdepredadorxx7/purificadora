@@ -125,7 +125,7 @@
                                     <img src="{{ asset('imagenes/garrafon.png') }}" alt="Garrafón 20L" class="img-size-50">
                                 </div>
                                 <div class="product-info">
-                                    <a href="javascript:void(0)" class="product-title">Garrafón 20L
+                                    <a href="javascript:void(0)" class="product-title">Garrafón 20L Nuevo
                                         <span class="badge badge-warning float-right">$35.00</span></a>
                                     <span class="product-description">
                                         Agua purificada en garrafón de 20 litros

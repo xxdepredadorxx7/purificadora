@@ -23,14 +23,25 @@ Route::get('/', function () {
 
 // Rutas para usuarios autenticados
 Route::middleware('auth')->group(function () {
+    // Página principal del cliente
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    // Catálogo de productos para clientes
     Route::get('/productos', [ProductosClientesController::class, 'index'])->name('productos.index');
+    Route::get('/productos/{id}/pedido', [ProductosClientesController::class, 'pedido'])->name('productos.pedido');
+
+    // Pedidos del cliente
     Route::get('/pedidos', [PedidosClientesController::class, 'index'])->name('pedidos.index');
+    Route::post('/pedidos', [PedidosClientesController::class, 'store'])->name('pedidos.store');
+
+    // Perfil del cliente
     Route::prefix('perfil')->name('perfil.')->group(function () {
         Route::get('/', [PerfilController::class, 'index'])->name('index');
         Route::get('/editar', [PerfilController::class, 'edit'])->name('edit');
         Route::put('/', [PerfilController::class, 'update'])->name('update');
     });
+
+    // Soporte
     Route::get('/soporte', [SoporteController::class, 'index'])->name('soporte.index');
 });
 
@@ -40,5 +51,4 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->as('admin.')->grou
     Route::resource('clientes', AdminClientesController::class)->except(['create', 'store', 'show']);
     Route::resource('productos', AdminProductosController::class)->names('productos');
     Route::resource('pedidos', AdminPedidosController::class)->names('pedidos');
-
 });
