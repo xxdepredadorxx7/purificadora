@@ -89,7 +89,7 @@
                     </div><!-- /.card-header -->
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-12 col-md-6 mb-3 mb-md-0">
                                 <div class="info-box mb-3 bg-gradient-info">
                                     <span class="info-box-icon"><i class="fas fa-water"></i></span>
                                     <div class="info-box-content">
@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12 col-md-6">
                                 <div class="info-box mb-3 bg-gradient-success">
                                     <span class="info-box-icon"><i class="fas fa-truck"></i></span>
                                     <div class="info-box-content">
@@ -163,6 +163,22 @@
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        /* Ajuste para imágenes de productos en móvil */
+        @media (max-width: 576px) {
+            .img-size-50 {
+                width: 40px !important;
+                height: 40px !important;
+            }
+            .info-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .info-box-icon {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
 @stop
 
 @section('js')

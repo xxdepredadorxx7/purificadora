@@ -22,7 +22,7 @@
 
     {{-- Accesos rápidos --}}
     <div class="row">
-        <div class="col-lg-4 col-6">
+        <div class="col-12 col-md-4 mb-3">
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>Mis Pedidos</h3>
@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <div class="col-lg-4 col-6">
+        <div class="col-12 col-md-4 mb-3">
             <div class="small-box bg-success">
                 <div class="inner">
                     <h3>Mi Perfil</h3>
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div class="col-lg-4 col-6">
+        <div class="col-12 col-md-4 mb-3">
             <div class="small-box bg-warning">
                 <div class="inner">
                     <h3>Soporte</h3>
@@ -68,6 +68,19 @@
     <style>
         .small-box {
             border-radius: 10px;
+        }
+        @media (max-width: 576px) {
+            .small-box .icon {
+                top: 10px !important;
+                right: 10px !important;
+                font-size: 2.2rem !important;
+            }
+            .small-box h3 {
+                font-size: 1.2rem !important;
+            }
+            .small-box p {
+                font-size: 1rem !important;
+            }
         }
     </style>
 @stop
