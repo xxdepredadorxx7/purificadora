@@ -22,8 +22,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Forzar HTTPS en entorno local (útil para pruebas con Ngrok)
-        if (app()->environment('local')) {
-            URL::forceScheme('https');
+        if (
+        app()->environment('local') &&
+        (request()->isSecure() || str_contains(request()->getHost(), 'ngrok'))
+        ) {
+        URL::forceScheme('https');
         }
 
         Gate::define('admin.access', function ($user) {
