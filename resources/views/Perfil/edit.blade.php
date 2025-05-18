@@ -7,16 +7,15 @@
 @stop
 
 @section('content')
-<div class="container">
+<div class="container contenido-ajustado">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Editar Perfil</div>
-
+        <div class="col-12 col-md-8">
+            <div class="card shadow-sm rounded">
+                <div class="card-header text-center text-md-left">Editar Perfil</div>
                 <div class="card-body">
                     @if ($errors->any())
                         <div class="alert alert-danger">
-                            <ul>
+                            <ul class="mb-0">
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
                                 @endforeach
@@ -58,12 +57,40 @@
                             <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
                         </div>
 
-                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
-                        <a href="{{ route('perfil.index') }}" class="btn btn-secondary">Cancelar</a>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-success mb-2 mb-md-0 me-md-2 w-100 w-md-auto">Guardar Cambios</button>
+                            <a href="{{ route('perfil.index') }}" class="btn btn-secondary w-100 w-md-auto">Cancelar</a>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('css')
+<style>
+    @media (max-width: 576px) {
+        .contenido-ajustado {
+            padding-top: 70px !important;
+        }
+        .card-header, .card-body {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .form-label {
+            font-size: 1rem;
+        }
+        .form-control {
+            font-size: 1rem;
+        }
+        .btn {
+            font-size: 1.1rem;
+        }
+        .d-grid {
+            gap: 0.5rem;
+        }
+    }
+</style>
 @endsection

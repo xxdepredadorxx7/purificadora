@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Editar Cliente</h1>
+<div class="container contenido-ajustado">
+    <h1 class="mb-4 text-center text-md-left">Editar Cliente</h1>
     <form action="{{ route('admin.clientes.update', $cliente->id) }}" method="POST">
         @csrf
         @method('PUT')
@@ -32,8 +32,32 @@
         </div>
 
         {{-- Botones --}}
-        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-        <a href="{{ route('admin.clientes.index') }}" class="btn btn-secondary">Cancelar</a>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" class="btn btn-primary mb-2 mb-md-0 me-md-2 w-100 w-md-auto">Guardar Cambios</button>
+            <a href="{{ route('admin.clientes.index') }}" class="btn btn-secondary w-100 w-md-auto">Cancelar</a>
+        </div>
     </form>
 </div>
+@endsection
+
+@section('css')
+<style>
+    @media (max-width: 576px) {
+        .contenido-ajustado {
+            padding-top: 70px !important;
+        }
+        .form-label {
+            font-size: 1rem;
+        }
+        .form-control {
+            font-size: 1rem;
+        }
+        .btn {
+            font-size: 1.1rem;
+        }
+        .d-grid {
+            gap: 0.5rem;
+        }
+    }
+</style>
 @endsection

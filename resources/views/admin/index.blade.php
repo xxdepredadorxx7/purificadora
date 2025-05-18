@@ -10,7 +10,7 @@
     {{-- Estadísticas --}}
     <div class="row">
         {{-- Clientes Registrados --}}
-        <div class="col-lg-3 col-6">
+        <div class="col-lg-3 col-12 col-md-6 mb-4">
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{ $clientesCount }}</h3>
@@ -24,7 +24,7 @@
         </div>
 
         {{-- Pedidos Realizados --}}
-        <div class="col-lg-3 col-6">
+        <div class="col-lg-3 col-12 col-md-6 mb-4">
             <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{ $pedidosCount }}</h3>
@@ -38,7 +38,7 @@
         </div>
 
         {{-- Productos Disponibles --}}
-        <div class="col-lg-3 col-6">
+        <div class="col-lg-3 col-12 col-md-6 mb-4">
             <div class="small-box bg-warning">
                 <div class="inner">
                     <h3>{{ $productosCount }}</h3>
@@ -58,30 +58,32 @@
             <h3 class="card-title">Últimos Clientes Registrados</h3>
         </div>
         <div class="card-body">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Fecha de Registro</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($ultimosClientes as $cliente)
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle mb-0">
+                    <thead class="thead-light">
                         <tr>
-                            <td>{{ $cliente->id }}</td>
-                            <td>{{ $cliente->name }}</td>
-                            <td>{{ $cliente->email }}</td>
-                            <td>{{ $cliente->created_at->format('d/m/Y') }}</td>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Fecha de Registro</th>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="4" class="text-center">No hay clientes registrados recientemente.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @forelse ($ultimosClientes as $cliente)
+                            <tr>
+                                <td>{{ $cliente->id }}</td>
+                                <td>{{ $cliente->name }}</td>
+                                <td>{{ $cliente->email }}</td>
+                                <td>{{ $cliente->created_at->format('d/m/Y') }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center">No hay clientes registrados recientemente.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @stop
@@ -91,6 +93,23 @@
     <style>
         .small-box {
             border-radius: 10px;
+        }
+        @media (max-width: 576px) {
+            .small-box {
+                margin-bottom: 1rem;
+            }
+            .contenido-ajustado {
+                padding-top: 70px !important;
+            }
+            .table {
+                font-size: 0.95rem;
+            }
+            .table th, .table td {
+                padding: 0.5rem;
+            }
+            .table-responsive {
+                margin-bottom: 1rem;
+            }
         }
     </style>
 @stop
