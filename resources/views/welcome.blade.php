@@ -13,7 +13,7 @@
 @stop
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid contenido-ajustado">
         <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-lg-3 col-6">
@@ -164,7 +164,6 @@
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
-        /* Ajuste para imágenes de productos en móvil */
         @media (max-width: 576px) {
             .img-size-50 {
                 width: 40px !important;
@@ -176,6 +175,9 @@
             }
             .info-box-icon {
                 margin-bottom: 10px;
+            }
+            .contenido-ajustado {
+                padding-top: 70px !important; /* Ajusta según la altura de tu navbar */
             }
         }
     </style>

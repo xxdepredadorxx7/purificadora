@@ -1,4 +1,3 @@
-{{-- filepath: c:\laragon\www\purificadora\resources\views\layouts\app.blade.php --}}
 @extends('adminlte::page')
 
 {{-- Meta viewport para responsividad --}}
@@ -39,7 +38,7 @@
 
 {{-- Contenido principal --}}
 @section('content')
-    <div class="container-fluid px-2 px-md-4">
+    <div class="container-fluid px-2 px-md-4 contenido-ajustado">
         @yield('content_body')
     </div>
 @stop
@@ -86,6 +85,9 @@
         }
         .container-fluid {
             padding: 10px !important;
+        }
+        .contenido-ajustado {
+            padding-top: 70px !important; /* Ajusta este valor según la altura de tu navbar */
         }
         footer {
             font-size: 0.95rem;
