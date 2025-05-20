@@ -53,4 +53,38 @@ class AuthController extends Controller
             'user'         => $user,
         ]);
     }
+
+    public function updateProfile(Request $request, $id)
+{
+    $request->validate([
+        'name' => 'sometimes|string|max:255',
+        'telefono' => 'sometimes|string|max:20',
+        'direccion' => 'sometimes|string|max:255',
+        'current_password' => 'required_with:new_password',
+        'new_password' => 'sometimes|string|min:6|confirmed',
+    ]);
+
+    $user = User::findOrFail($id);
+
+    // Verificar contraseña actual si se quiere cambiar la contraseña
+    if ($request->has('new_password')) {
+        if (!Hash::check($request->current_password, $user->password)) {
+            return response()->json(['message' => 'La contraseña actual es incorrecta'], 401);
+        }
+
+        $user->password = Hash::make($request->new_password);
+    }
+
+    // Actualizar otros campos
+    $user->name = $request->name ?? $user->name;
+    $user->telefono = $request->telefono ?? $user->telefono;
+    $user->direccion = $request->direccion ?? $user->direccion;
+
+    $user->save();
+
+    return response()->json([
+        'message' => 'Perfil actualizado correctamente',
+        'user' => $user
+    ]);
+}
 }

@@ -16,4 +16,13 @@ class Producto extends Model
         'cantidad',
     ];
 
+    protected $casts = [
+    'precio' => 'decimal:2',  // Asegura 2 decimales
+    'cantidad' => 'integer',
+];
+
+    public function pedidos() {
+    return $this->hasMany(Pedido::class);
+}
+
 }

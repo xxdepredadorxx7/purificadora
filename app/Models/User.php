@@ -48,8 +48,9 @@ class User extends Authenticatable
      * @return array<string, string>
      */
     protected $casts = [
-    'email_verified_at' => 'datetime',
-    'password' => 'hashed',
+        'role' => 'string',
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
 
 
@@ -60,6 +61,16 @@ class User extends Authenticatable
      *
      * @return string
      */
+
+    /**
+     * Get the pedidos for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class);
+    }
     public function adminlte_image()
     {
         return 'https://picsum.photos/300/300'; // Imagen de ejemplo

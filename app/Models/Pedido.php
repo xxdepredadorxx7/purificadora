@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Pedido extends Model
 {
@@ -19,11 +20,19 @@ class Pedido extends Model
 
     protected static function boot()
     {
+        static::creating(function ($pedido) {
+        $pedido->total = $pedido->producto->precio * $pedido->cantidad;
+    });
+
         parent::boot();
 
         // Reducir la cantidad del producto al crear un pedido
         static::creating(function ($pedido) {
             $producto = Producto::find($pedido->producto_id);
+
+            DB::transaction(function () use ($pedido, $producto) {
+                $producto->decrement('cantidad', $pedido->cantidad);
+            });
             if ($producto) {
                 if ($producto->cantidad >= $pedido->cantidad) {
                     $producto->cantidad -= $pedido->cantidad;
