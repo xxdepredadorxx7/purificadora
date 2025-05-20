@@ -26,4 +26,5 @@ echo %raw_url% > storage\app\ngrok.txt
 echo === Servidores en marcha ===
 echo Laravel en: http://localhost:8000
 echo Ngrok en: %raw_url%
+echo Ruta API: %raw_url%/api/data
 pause
