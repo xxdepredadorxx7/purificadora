@@ -1,3 +1,4 @@
+::.\Servidor.bat
 @echo off
 cd /d C:\laragon\www\purificadora
 
