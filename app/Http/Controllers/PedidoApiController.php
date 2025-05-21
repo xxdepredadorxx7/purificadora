@@ -54,36 +54,51 @@ class PedidoApiController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $pedido = Pedido::where('user_id', Auth::id())->find($id);
-        if (!$pedido) {
-            return response()->json(['message' => 'Pedido no encontrado'], 404);
-        }
-
-        $request->validate([
-            'cantidad' => 'sometimes|integer|min:1',
-            'estado' => 'sometimes|string|in:pendiente,completado,cancelado',
-        ]);
-
-        // Solo permitir actualizar cantidad y estado
-        if ($request->has('cantidad')) {
-            $producto = Producto::find($pedido->producto_id);
-            $diferencia = $request->cantidad - $pedido->cantidad;
-            if ($producto->cantidad < $diferencia) {
-                return response()->json(['message' => 'No hay suficiente cantidad disponible para actualizar el pedido.'], 400);
-            }
-            $producto->cantidad -= $diferencia;
-            $producto->save();
-            $pedido->cantidad = $request->cantidad;
-            $pedido->total = $producto->precio * $request->cantidad;
-        }
-        if ($request->has('estado')) {
-            $pedido->estado = $request->estado;
-        }
-        $pedido->save();
-
-        return response()->json($pedido);
+{
+    $pedido = Pedido::where('user_id', Auth::id())->find($id);
+    if (!$pedido) {
+        return response()->json(['message' => 'Pedido no encontrado'], 404);
     }
+
+    $request->validate([
+        'cantidad' => 'sometimes|integer|min:1',
+        'estado' => 'sometimes|string|in:pendiente,completado,cancelado',
+    ]);
+
+    // Actualizar cantidad del pedido si fue solicitada
+    if ($request->has('cantidad')) {
+        $producto = Producto::find($pedido->producto_id);
+
+        if (!$producto) {
+            return response()->json(['message' => 'Producto no encontrado'], 404);
+        }
+
+        $diferencia = $request->cantidad - $pedido->cantidad;
+
+        // Si el nuevo pedido requiere más stock del disponible
+        if ($diferencia > 0 && $producto->cantidad < $diferencia) {
+            return response()->json(['message' => 'No hay suficiente cantidad disponible para actualizar el pedido.'], 400);
+        }
+
+        // Ajustar stock (puede aumentar o disminuir)
+        $producto->cantidad -= $diferencia;
+        $producto->cantidad = max(0, $producto->cantidad); // Seguridad contra negativos
+        $producto->save();
+
+        // Actualizar pedido
+        $pedido->cantidad = $request->cantidad;
+        $pedido->total = $producto->precio * $request->cantidad;
+    }
+
+    // Actualizar estado si fue solicitado
+    if ($request->has('estado')) {
+        $pedido->estado = $request->estado;
+    }
+
+    $pedido->save();
+
+    return response()->json($pedido);
+}
 
     public function destroy($id)
     {
