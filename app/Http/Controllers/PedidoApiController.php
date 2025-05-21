@@ -65,48 +65,53 @@ class PedidoApiController extends Controller
         'estado' => 'sometimes|string|in:pendiente,completado,cancelado',
     ]);
 
-    // Actualizar cantidad del pedido si fue solicitada
+    $producto = Producto::find($pedido->producto_id);
+    if (!$producto) {
+        return response()->json(['message' => 'Producto no encontrado'], 404);
+    }
+
+    // Actualización de cantidad (si se solicita)
     if ($request->has('cantidad')) {
-        $producto = Producto::find($pedido->producto_id);
-
-        if (!$producto) {
-            return response()->json(['message' => 'Producto no encontrado'], 404);
-        }
-
         $diferencia = $request->cantidad - $pedido->cantidad;
 
-        // Si el nuevo pedido requiere más stock del disponible
         if ($diferencia > 0 && $producto->cantidad < $diferencia) {
             return response()->json(['message' => 'No hay suficiente cantidad disponible para actualizar el pedido.'], 400);
         }
 
-        // Ajustar stock (puede aumentar o disminuir)
         $producto->cantidad -= $diferencia;
-        $producto->cantidad = max(0, $producto->cantidad); // Seguridad contra negativos
+        $producto->cantidad = max(0, $producto->cantidad);
         $producto->save();
 
-        // Actualizar pedido
         $pedido->cantidad = $request->cantidad;
         $pedido->total = $producto->precio * $request->cantidad;
     }
 
-    // Actualizar estado si fue solicitado
+    // Actualización de estado (si se solicita)
     if ($request->has('estado')) {
-        $pedido->estado = $request->estado;
+        $estadoAnterior = $pedido->estado;
+        $estadoNuevo = $request->estado;
+
+        // Si cambia de no cancelado a cancelado → devolver stock
+        if ($estadoAnterior !== 'cancelado' && $estadoNuevo === 'cancelado') {
+            $producto->cantidad += $pedido->cantidad;
+            $producto->save();
+        }
+
+        // Si cambia de cancelado a otro estado → volver a descontar stock
+        if ($estadoAnterior === 'cancelado' && $estadoNuevo !== 'cancelado') {
+            if ($producto->cantidad < $pedido->cantidad) {
+                return response()->json(['message' => 'No hay suficiente stock para reactivar el pedido.'], 400);
+            }
+            $producto->cantidad -= $pedido->cantidad;
+            $producto->cantidad = max(0, $producto->cantidad);
+            $producto->save();
+        }
+
+        $pedido->estado = $estadoNuevo;
     }
 
     $pedido->save();
 
     return response()->json($pedido);
 }
-
-    public function destroy($id)
-    {
-        $pedido = Pedido::where('user_id', Auth::id())->find($id);
-        if (!$pedido) {
-            return response()->json(['message' => 'Pedido no encontrado'], 404);
-        }
-        $pedido->delete();
-        return response()->json(['message' => 'Pedido eliminado']);
-    }
 }
